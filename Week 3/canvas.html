@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head> 
+    <title Canvas Lab></title>
+<meta charset="UTF=8">
+</head>
+
+<body>
+<h1>Canvas Lab</h1>
+<canvas id="canvas" width="800" height="600" style="border: 1px solid"></canvas>
+</body>
+
+<script>
+
+    var canvas = document.getElementById("canvas")
+    var ctx = canvas.getContext("2d")
+    //rectangles
+    ctx.fillstyle = "#893737"
+ctx.fillRect(20,20,50,100)
+
+    ctx.strokeStyle = "#4C1B1B"
+    ctx.lineWidth = "1"
+    ctx.strokeRect = (20,20,60,120)
+    //set star point for lines
+ctx.beginPath()
+ctx.moveTo(0,0)
+ctx.lineTo(800,0)
+ctx.lineTo(650,40)
+ctx.lineTo(60,500)
+ctx.lineTo(800,800)
+ctx.lineTo(35,365)
+ctx.stroke();
+
+ctx.strokeStyle = "red"
+ctx.beginPath()
+ctx.moveTo(400,20)
+ctx.lineTo(400,600)
+ctx.stroke();
+
+
+//draw tri
+ctx.strokeStyle = "#FFB7C3"
+ctx.fillStyle = "#D3FAC7"
+ctx.beginPath()
+ctx.moveTo(400,200)
+ctx.lineTo(450,100)
+ctx.lineTo(400,120)
+ctx.lineTo(350,100)
+//confirming a shape
+ctx.closePath()
+//filling the shape
+ctx.fill()
+//draws the lines
+ctx.stroke()
+//draw circle
+//ctx.arc(xpos,ypos,radius,start angle,end angle, true false: clockwise)
+ctx.arc (150,150,100,0,4 * Math.PI/2,false)
+ctx.closePath()
+ctx.fill()
+ctx.stroke()
+
+//draw eyes
+ctx.beginPath()
+
+ctx.arc(110,120,10,0, Math.PI * 2,true);
+//left eye
+
+ctx.arc(190,120,10,0, Math.PI * 2,true);
+//right eye
+//fill
+ctx.fillStyle= "blue"
+ctx.fill()
+//SMILE :)))
+ctx.lineWidth = 5;
+ctx.strokeStyle = "red";
+ctx.beginPath()
+ctx.arc (150,160,50,0,1 * Math.PI,false);
+ctx.stroke();
+ctx.fill()
+
+</script>
