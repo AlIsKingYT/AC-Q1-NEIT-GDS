@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Alex Crespo">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontlines Wiki by Alex Crespo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Frontlines Wiki</h1>
+  <p><em>"Race to the enemy base and destroy their defenses!"</em></p>
+
+  <div id="menu">
+    <a href="#rules">Game Rules</a> |
+    <a href="#battle">Battle Mechanic</a> |
+    <a href="#board">Digital Board</a> |
+    <a href="#cards">Battle Cards</a> |
+    <a href="#video">Video</a>
+  </div>
+
+  <div id="main">
+
+    <h2 id="rules">Game Rules</h2>
+    <ul>
+      <li>4 players total, 2 per team (Red vs Blue)</li>
+      <li>Roll a die to move your soldier forward</li>
+      <li>Brown tiles = Battle Cards that can help or hurt you</li>
+      <li>First team to break through the enemy wall wins!</li>
+    </ul>
+
+    <h2 id="battle">Battle Mechanic</h2>
+    <p>If both teams land on a brown Battle Tile:</p>
+    <ul>
+      <li>Each player rolls the die</li>
+      <li>Add both rolls for your team</li>
+      <li>Highest total wins the Battle Card</li>
+      <li>Losing team moves back 1 space</li>
+    </ul>
+
+    <h2 id="board">Digital Board Design</h2>
+    <div id= "picture">
+    <img src="FL.png"
+    width="980px"
+    
+    
+    <p><b>This canvas just show shapes :></b></p>
+
+    <div id="pictureDiv">
+      <canvas id="myCanvas" width="800" height="800"></canvas>
+    </div>
+
+    <div class="buttons">
+      <button id="drawBtn">Show Shapes</button>
+      <button id="clearBtn">Clear</button>
+    </div>
+
+    <h2 id="cards">Battle Cards</h2>
+
+    <h3>Common Cards</h3>
+    <ul>
+      <li>Injury – Lose your next turn</li>
+      <li>Mud Pit – Move back 2 spaces</li>
+      <li>Lucky Find – Move ahead 2 spaces</li>
+      <li>Broken Weapon – Stay on your previous tile</li>
+      <li>Ammo Refill – Reroll the die</li>
+    </ul>
+
+    <h3>Rare & Legendary Cards</h3>
+    <ul>
+      <li>Reinforcements – Bring your teammate to your spot</li>
+      <li>Ambush! – Make an enemy move back 3 spaces</li>
+      <li>Airstrike – Other team moves back 1 space</li>
+      <li>Supply Drop – Roll again and double your next move</li>
+      <li>Helicopter Evacuation – Move 10 spaces forward, skip next turn</li>
+    </ul>
+
+    <h2 id="video">Gameplay Video</h2>
+    <p>Watch the Frontlines promo video below:</p>
+    <a href="https://www.youtube.com/watch?v=yTjvZTFxkBI" target="_blank">🎥 Watch on YouTube</a>
+
+  </div>
+
+  <footer>
+    <p>Made by <strong>Alex Crespo</strong> 10/15/2025</p>
+  </footer>
+<script>const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawCross(x, y) {
+  ctx.beginPath();
+  ctx.moveTo(x - 5, y);
+  ctx.lineTo(x + 5, y);
+  ctx.moveTo(x, y - 5);
+  ctx.lineTo(x, y + 5);
+  ctx.stroke();
+}
+
+function drawShapes() {
+  clearCanvas();
+
+  // Yellow square
+  ctx.fillStyle = "yellow";
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 3;
+  ctx.fillRect(40, 60, 120, 120);
+  ctx.strokeRect(40, 60, 120, 120);
+  drawCross(40, 60);
+
+  // Green circle
+  ctx.beginPath();
+  ctx.arc(300, 270, 60, 0, Math.PI * 2);
+  ctx.fillStyle = "lightgreen";
+  ctx.fill();
+  ctx.strokeStyle = "red";
+  ctx.stroke();
+  drawCross(300, 270);
+
+  // Pentagon
+  const cx = 570, cy = 160, radius = 70;
+  ctx.beginPath();
+  for (let i = 0; i < 5; i++) {
+    const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+    const x = cx + Math.cos(angle) * radius;
+    const y = cy + Math.sin(angle) * radius;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = "green";
+  ctx.fill();
+  ctx.strokeStyle = "darkgreen";
+  ctx.stroke();
+  drawCross(cx, cy);
+
+  // Star
+  const sx = 600, sy = 480, outer = 70, inner = 30;
+  ctx.beginPath();
+  for (let i = 0; i < 10; i++) {
+    const r = i % 2 === 0 ? outer : inner;
+    const a = -Math.PI / 2 + (i * Math.PI) / 5;
+    const x = sx + Math.cos(a) * r;
+    const y = sy + Math.sin(a) * r;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = "lime";
+  ctx.fill();
+  ctx.strokeStyle = "black";
+  ctx.stroke();
+  drawCross(sx, sy);
+
+  // Red diagonal line
+  ctx.beginPath();
+  ctx.moveTo(60, 540);
+  ctx.lineTo(240, 640);
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "red";
+  ctx.stroke();
+  drawCross(60, 540);
+}
+
+document.getElementById('drawBtn').addEventListener('click', drawShapes);
+document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+
+// Draw once when page loads
+drawShapes();
+</script>
+  <script src="script.js"></script>
+</body>
+</html>
